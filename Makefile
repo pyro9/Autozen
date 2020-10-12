@@ -17,11 +17,11 @@ strip: autozen-nopulse seq2wav
 	strip autozen-nopulse seq2wav
 
 autozen: autozen.c wave_table.o *.xpm
-	$(CC) $(OS) -DGTK_ENABLE_BROKEN -D_REENTRANT -DPUBLIC_SEQUENCES='"$(PUBLIC_SEQUENCES)"' -DUSE_PULSE $(CFLAGS) `pkg-config --cflags gtk+-2.0` `pkg-config  --libs gtk+-2.0` -pthread autozen.c wave_table.o -o autozen $(DEBUG_LIBS) -l pulse-simple -lm
+	$(CC) $(OS) -DGTK_ENABLE_BROKEN -D_REENTRANT -DPUBLIC_SEQUENCES='"$(PUBLIC_SEQUENCES)"' -DUSE_PULSE $(CFLAGS) `pkg-config --cflags gtk+-2.0` -pthread autozen.c wave_table.o -o autozen $(DEBUG_LIBS) -l pulse-simple -lm `pkg-config  --libs gtk+-2.0` 
 #	$(CC) $(OS) -D_REENTRANT -DPUBLIC_SEQUENCES='"$(PUBLIC_SEQUENCES)"' -DUSE_PULSE $(CFLAGS) `gtk-config --cflags` `gtk-config  --libs` -pthread autozen.c wave_table.o -o autozen $(DEBUG_LIBS) -l pulse-simple
 
 autozen-nopulse: autozen.c *.xpm wave_table.o
-	$(CC) $(OS) -D_REENTRANT -DPUBLIC_SEQUENCES='"$(PUBLIC_SEQUENCES)"' `pkg-config gtk+-2.0 --cflags` `pkg-config gtk+-2.0 --libs` -pthread autozen.c wave_table.o -o autozen-nopulse $(DEBUG_LIBS) -lm
+	$(CC) $(OS) -D_REENTRANT -DPUBLIC_SEQUENCES='"$(PUBLIC_SEQUENCES)"' `pkg-config gtk+-2.0 --cflags` -pthread autozen.c wave_table.o -o autozen-nopulse $(DEBUG_LIBS) -lm `pkg-config gtk+-2.0 --libs` 
 
 seq2wav: seq2wav.c wave_table.o
 	$(CC) seq2wav.c -o seq2wav wave_table.o -lm
